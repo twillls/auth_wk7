@@ -12,10 +12,26 @@ router.get('/', (req, res) => {
     sql.query(query, (err, result) => {
         if (err) { throw err; console.log(err); }
 
-        console.log(result); // should see objects wrapped in an array
+        // render the home view with dynamic data
+        res.render('home', { people: result });
+    })
+})
+
+// localhost:3000/anything
+
+router.get('/:id', (req, res) => {
+    console.log('hit a dynamic route');
+    console.log(req.params.id);
+
+    let query = `SELECT * FROM tbl_bio WHERE profID="${req.params.id}"`;
+
+    sql.query(query, (err, result) => {
+        if (err) { throw err; console.log(err); }
+
+        console.log(result); //should see obj wrapped in array
 
         // render the home view with dynamic data
-        res.render('home', { data: result });
+        // res.render('home', { people: result });
     })
 })
 

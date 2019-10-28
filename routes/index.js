@@ -31,7 +31,8 @@ router.get('/:id', (req, res) => {
         console.log(result); //should see obj wrapped in array
 
         // render the home view with dynamic data
-        // res.render('home', { people: result });
+        // send db query back to browser
+        res.json(result);
     })
 })
 

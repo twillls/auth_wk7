@@ -6,6 +6,12 @@ const myVM = (() => {
     let userButtons = document.querySelectorAll('.u-link'),
         lightbox = document.querySelector('.lightbox');
 
+    function renderSocialMedia(socialMedia) {
+        return `<ul class="u-social">
+                    ${socialMedia.map(item => `<;i>${item}</li>`).join('')}
+                </ul>` // back ticks `` indicate template string
+    }
+
     function parseUserData(user) { // user is db result from getUserData fetch
         let targetDiv = document.querySelector('.lb-content'),
             targetImg = lightbox.querySelector('img');
@@ -13,6 +19,7 @@ const myVM = (() => {
         let bioContent = `
             <p>${user.bio}</p>
             <h4>Social Media:/</h4>
+            ${renderSocialMedia(user.social)}
         `;
 
         console.log(bioContent);

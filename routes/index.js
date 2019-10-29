@@ -28,9 +28,17 @@ router.get('/:id', (req, res) => {
     sql.query(query, (err, result) => {
         if (err) { throw err; console.log(err); }
 
-        console.log(result); //should see obj wrapped in array
+        //console.log(result); //should see obj wrapped in array
 
-        // render the home view with dynamic data
+        // turn our social property into an array - its just text in db, which we can't work with
+        result[0].social = result[0].social.split(",").map(function(item) {
+            item = item.trim(); //removes extra space from ea word
+
+            return item;
+        })
+
+        //console.log('after split: ', result[0]);
+        
         // send db query back to browser
         res.json(result);
     })

@@ -30,7 +30,7 @@ const myVM = (() => {
         // find the img closest to the anchor tag and get its src
         let imgSrc = this.previousElementSibling.getAttribute('src');
 
-        let url = `/${this.getAttribute('href')}`; // /1
+        let url = `/users/${this.getAttribute('href')}`; // /1
 
         fetch(url) // go get the data
             .then(res => res.json()) // turn it into a file js can use, parse json res into plain obj

@@ -13,6 +13,18 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use('/', require('./routes/index'));
 
+app.use((req, res, next) => {
+    var err = new Error('Not Found');
+    err.status = 404;
+    err.customMessage = "Oh noes! Something horrible happened!";
+
+    next(err);
+})
+
+app.use((req, res) => {
+    res.render('error', { data: err, layout: 'errorPage'});
+}) 
+
 app.listen(port, () => {
     console.log(`app is running on ${port}`);
 })
